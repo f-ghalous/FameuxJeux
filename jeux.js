@@ -7,9 +7,11 @@ error.style.display = "none";
 //error.textContent = 'bbbbbbb';
 
 // géneer un nombre aleatoire
+
 function genererNombreEntier(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+// gérer les erreurs de l'utilisateur
 input.addEventListener('keyup', ()=>{
     if (isNaN(input.value)) {
         error.style.display = "inline";
@@ -19,28 +21,38 @@ input.addEventListener('keyup', ()=>{
    
     }
 })
-
-bouton.addEventListener('click', ()=>{
-    let  inputTest = parseInt(input.value);
-   
-    let nombreAleatoire = genererNombreEntier(1001);
-    alert('je suis input  ' + inputTest + 'je suis aleatoire '+ nombreAleatoire);
+formulaire.addEventListener('submit', (e)=>{
+ e.preventDefault();
+ if (isNaN(input.value) || (input.value == '')) {
+    input.style.borderColor = 'red';
     
-    if (inputTest == nombreAleatoire) {
-        alert('felicitation')
-        
-    } 
-    else if(inputTest > nombreAleatoire){
-        error.style.display = "block";
-        error.textContent   = 'grand';
-        alert('grand');
-
-         }
-         else{
-           error.style.display = "block";
-            error.textContent   = 'petit';
-            alert('petit');
-    }
-        
-    
+ } else {
+    input.style.borderColor = 'green';
+ }
 })
+
+
+// bouton.addEventListener('click', ()=>{
+//     let  inputTest = parseInt(input.value);
+   
+//     let nombreAleatoire = genererNombreEntier(1001);
+//     alert('je suis input  ' + inputTest + 'je suis aleatoire '+ nombreAleatoire);
+    
+//     if (inputTest == nombreAleatoire) {
+//         alert('felicitation')
+        
+//     } 
+//     else if(inputTest > nombreAleatoire){
+//         error.style.display = "block";
+//         error.textContent   = 'grand';
+//         alert('grand');
+
+//          }
+//          else{
+//            error.style.display = "block";
+//             error.textContent   = 'petit';
+//             alert('petit');
+//     }
+        
+    
+//})
