@@ -1,8 +1,47 @@
-let input = document.querySelector('#prix');
-let error = document.querySelector('small');
+let input      = document.querySelector('#prix');
+let error      = document.querySelector('small');
 let formulaire = document.querySelector('#formulaire');
+let divExistant = document.querySelector('#instructions')
 let bouton     = document.querySelector('button');
-input.textContent = 'bonjour';
+let coup       = 0;
+let nombreChoisi;
+// Créer la fonction verifier
+function verifier(nombre) {
+    let instruction = document.createElement('div');
+    let nombreAleatoire = genererNombreEntier(1001);
+    if (nombre < nombreAleatoire) {
+        // c petit
+       
+        instruction.textContent = "#"+ coup + "( "+ nombre + ") C'est moins ! ";
+        divExistant.prepend(instruction);
+        instruction.classList.add('instruction', 'moins');
+        
+        
+    } else if((nombre> nombreAleatoire) && (coup < 3)) {
+        // c moins
+        instruction.textContent =  instruction.textContent = "#"+ coup + "( "+ nombre + ") C'est plus ! ";
+        divExistant.prepend(instruction);
+        instruction.classList.add('instruction', 'plus');
+        alert(coup);
+        
+             }
+           else{
+            // Félicitation vous avez trouvez le juste prix
+            instruction.textContent =  "#"+ coup + "( "+ nombre + ") Félicitation vous avez réussie! ";
+            divExistant.prepend(instruction);
+            instruction.classList.add('instruction', 'fini');
+           }
+  
+    
+}
+
+
+
+
+
+
+
+
 error.style.display = "none";
 //error.textContent = 'bbbbbbb';
 
@@ -27,9 +66,14 @@ formulaire.addEventListener('submit', (e)=>{
     input.style.borderColor = 'red';
     
  } else {
+    coup ++;
     input.style.borderColor = 'green';
+    nombreChoisi            = input.value;
+    input.value             = '';
+    verifier(nombreChoisi);
  }
 })
+
 
 
 // bouton.addEventListener('click', ()=>{
