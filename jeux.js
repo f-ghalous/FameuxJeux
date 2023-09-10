@@ -22,7 +22,7 @@ function verifier(nombre) {
         instruction.textContent =  instruction.textContent = "#"+ coup + "( "+ nombre + ") C'est plus ! ";
         divExistant.prepend(instruction);
         instruction.classList.add('instruction', 'plus');
-        alert(coup);
+       
         
              }
            else{
@@ -30,6 +30,7 @@ function verifier(nombre) {
             instruction.textContent =  "#"+ coup + "( "+ nombre + ") Félicitation vous avez réussie! ";
             divExistant.prepend(instruction);
             instruction.classList.add('instruction', 'fini');
+            input.disabled = true;
            }
   
     
@@ -60,43 +61,31 @@ input.addEventListener('keyup', ()=>{
    
     }
 })
-formulaire.addEventListener('submit', (e)=>{
- e.preventDefault();
- if (isNaN(input.value) || (input.value == '')) {
-    input.style.borderColor = 'red';
+formulaire.addEventListener('submit', (e) => {
+    e.preventDefault();
     
- } else {
-    coup ++;
-    input.style.borderColor = 'green';
-    nombreChoisi            = input.value;
-    input.value             = '';
-    verifier(nombreChoisi);
- }
-})
-
-
-
-// bouton.addEventListener('click', ()=>{
-//     let  inputTest = parseInt(input.value);
-   
-//     let nombreAleatoire = genererNombreEntier(1001);
-//     alert('je suis input  ' + inputTest + 'je suis aleatoire '+ nombreAleatoire);
+    if (isNaN(input.value) || input.value === '') {
+      input.style.borderColor = 'red';
+    } else {
+           nombreChoisi = parseInt(input.value, 10); // Convertir la valeur en nombre entier
     
-//     if (inputTest == nombreAleatoire) {
-//         alert('felicitation')
+      if (nombreChoisi < 0 || nombreChoisi > 1000) {
+        input.style.borderColor = 'red';
+        error.textContent = 'Votre nombre doit être entre 0 et 1000. Recommencez.';
+        error.style.display = "inline";
+      } else {
+        input.style.borderColor = 'green';
+        error.textContent = ''; // Réinitialisez le message d'erreur
+        error.style.display = "inline";
         
-//     } 
-//     else if(inputTest > nombreAleatoire){
-//         error.style.display = "block";
-//         error.textContent   = 'grand';
-//         alert('grand');
-
-//          }
-//          else{
-//            error.style.display = "block";
-//             error.textContent   = 'petit';
-//             alert('petit');
-//     }
-        
+        // Faites ce que vous devez faire avec la valeur valide (coup ++, etc.)
+        verifier(nombreChoisi);
+      }
+    }
     
-//})
+    input.value = ''; // Réinitialisez la valeur de l'input après traitement
+  });
+  
+
+
+
